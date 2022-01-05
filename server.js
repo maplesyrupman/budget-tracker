@@ -18,11 +18,16 @@ app.use(express.static("public"));
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 
-// routes
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/index.html'))
+// })
+
 app.use(require("./routes/api.js"));
+
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
