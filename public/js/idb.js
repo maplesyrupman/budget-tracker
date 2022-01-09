@@ -53,7 +53,7 @@ function uploadTransaction() {
                 const transactionObjectStore = transaction.objectStore('new_transaction')
 
                 transactionObjectStore.clear()
-                alert('All saved transactions have been submitted!')
+                console.log('All saved transactions have been submitted!')
             })
             .catch(console.log)
         }

@@ -6,7 +6,8 @@ const FILES_TO_CACHE = [
     "./index.html",
     "./css/styles.css",
     "./js/idb.js",
-    "./js/index.js"
+    "./js/index.js",
+    "./manifest.json"
 ];
 
 self.addEventListener('install', function(e) {
@@ -40,10 +41,10 @@ self.addEventListener('activate', function (e) {
 
 self.addEventListener('fetch', function(e) {
     console.log('fetch request : ' + e.request.url)
-    caches.keys().then(console.log)
     e.respondWith(
-        caches.match(e.request).then(request => {
+        caches.open(CACHE_NAME)
+        .then(cache => caches.match(e.request)).then(request => {
+            console.log(request, '----------------------')
             return request || fetch(e.request)
-        })
-    )
+        }))
 })
